@@ -17,5 +17,5 @@ function displayTodos() { //ul'de li olusturup gosterilmesini sağlar.
         const li = document.createElement('li'); // li elementi olusturma.
         li.textContent = TODOS[i]; //li 'yi gorevle doldur.
         UL_DOM.appendChild(li); //li elementini listeye ekle.
-    }sdsds
+    }
 }
