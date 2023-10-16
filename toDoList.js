@@ -1,11 +1,18 @@
 const UL_DOM = document.querySelector('#list');
 const BUTTON = document.querySelector('#button');
 const INPUT = document.querySelector('#task');
-const TODOS = []; 
+let TODOS = []; 
+
+// Sayfa yüklendiğinde localStorage'dan görevleri al
+if (localStorage.getItem('todos')) {
+    TODOS = JSON.parse(localStorage.getItem('todos')); // localStorage'dan görevleri al ve JavaScript nesnesine dönüştür
+    displayTodos(); // Görevleri ekranda görüntüle
+}
 
 BUTTON.addEventListener("click", () => { //butona tiklandiginda
     const task = INPUT.value;  //task'e input degerini al.
     TODOS.push(task); //todos arrayine task'i ekle.
+    saveTodosToLocalStorage(); // Yeni görev ekledikten sonra localStorage'a kaydet
     displayTodos(); //taskleri gosteren fonksiyonu cagiriyoruz.
     INPUT.value = ''; // Görev ekledikten sonra input alanını temizle
 });
@@ -18,4 +25,8 @@ function displayTodos() { //ul'de li olusturup gosterilmesini sağlar.
         li.textContent = TODOS[i]; //li 'yi gorevle doldur.
         UL_DOM.appendChild(li); //li elementini listeye ekle.
     }
+}
+
+function saveTodosToLocalStorage() {
+    localStorage.setItem('todos', JSON.stringify(TODOS)); // Görevleri JSON formatına çevirerek localStorage'a kaydet
 }
